@@ -19,6 +19,23 @@ edit my_configuration.ini
 ./riemann-zyxel-gs1200.py my_configuration.ini
 ```
 
+## License
+
+Copyright (c) 2019, Martin Stensgård.
+All rights reserved.
+
+riemann-zyxel-gs1200 is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, only version 3 of the License.
+
+riemann-zyxel-gs1200 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with riemann-zyxel-gs1200. If not, see <http://www.gnu.org/licenses/>.
+
 [1]: https://www.zyxel.com/products_services/5-Port-8-Port-Web-Managed-PoE-Gigabit-Switch-GS1200-5HP-v2-GS1200-8HP-v2/
 [2]: http://riemann.io/
 [3]: https://github.com/riemann/riemann-dash
