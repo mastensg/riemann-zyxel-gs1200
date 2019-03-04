@@ -1,0 +1,7 @@
+[{'metric': 60.0, 'service': 'total power'},
+ {'metric': 50.0, 'service': 'max led power'},
+ {'metric': 6.0, 'service': 'port 1 power'},
+ {'metric': 3.5, 'service': 'port 2 power'},
+ {'metric': 0.0, 'service': 'port 3 power'},
+ {'metric': 0.0, 'service': 'port 4 power'},
+ {'metric': 9.5, 'service': 'total real power'}]

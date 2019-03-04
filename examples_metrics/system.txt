@@ -1,0 +1,11 @@
+[{'description': 'ports:          5\n'
+                 'model name:     GS1200-5HP v2\n'
+                 'device name:    poe2\n'
+                 'build date:     2017.09.18\n'
+                 'mac:            B8:EC:A3:F9:9B:EF\n'
+                 'ip:             10.13.37.240\n'
+                 'subnet mask:    255.255.255.0\n'
+                 'gateway:        10.13.37.1\n'
+                 'dhcp state:     0\n',
+  'service': 'system',
+  'state': 'ok'}]

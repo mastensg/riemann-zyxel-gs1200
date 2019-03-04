@@ -1,0 +1,1 @@
+var igmp = 0;var igmpstaticrouterport = 5;var unknow = 0;

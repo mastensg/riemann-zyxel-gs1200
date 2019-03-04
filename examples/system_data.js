@@ -1,0 +1,16 @@
+var Max_port = '5';
+var model_name = 'GS1200-5HP v2';
+var sys_dev_name = 'poe2';
+var sys_fmw_ver = 'V1.00(ABKN.0)C0';
+var sys_bld_date = '2017.09.18';
+var sys_MAC = 'B8:EC:A3:F9:9B:EF';
+var sys_IP = '10.13.37.240';
+var sys_sbnt_msk = '255.255.255.0';
+var sys_gateway = '10.13.37.1';
+var sys_dhcp_state = '0';
+var sys_first_login = '0';
+var loop = 'Normal';
+var loop_status = ['Normal','Normal','Normal','Normal','Normal','Loop','Loop',];
+var logined = '1';
+var isTrunk = 0;
+var sys_eee_state = '0';
