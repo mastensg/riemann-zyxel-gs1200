@@ -13,10 +13,10 @@ A [riemann-dash][3] dashboard fed by this program may look like this:
 ## How to run
 
 ```
-pip3 install --user -r requirements.txt
+pip3 install --user riemann-zyxel-gs1200
 cp example.ini my_configuration.ini
 edit my_configuration.ini
-./riemann-zyxel-gs1200.py my_configuration.ini
+python3 -m riemann_zyxel_gs1200 my_configuration.ini
 ```
 
 ## License
