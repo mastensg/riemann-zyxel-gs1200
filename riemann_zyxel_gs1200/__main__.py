@@ -94,7 +94,7 @@ def metrics_of_link(doc):
             port_number = i + 1
 
             yield {
-                "service": f"port {port_number} link up",
+                "service": "port {} link up".format(port_number),
                 "metric": 1.0 if "Up" == value else 0.0,
                 "state": value.lower(),
             }
@@ -120,7 +120,7 @@ def metrics_of_link(doc):
             port_number = i + 1
 
             yield {
-                "service": f"port {port_number} link speed",
+                "service": "port {} link speed".format(port_number),
                 "metric": number,
             }
 
@@ -141,12 +141,12 @@ def metrics_of_link(doc):
             port_number = i + 1
 
             yield {
-                "service": f"port {port_number} tx packets",
+                "service": "port {} tx packets".format(port_number),
                 "metric": tx,
             }
 
             yield {
-                "service": f"port {port_number} rx packets",
+                "service": "port {} rx packets".format(port_number),
                 "metric": rx,
             }
 
@@ -183,7 +183,7 @@ def metrics_of_poe(doc):
             port_number = i + 1
 
             yield {
-                "service": f"port {port_number} power",
+                "service": "port {} power".format(port_number),
                 "metric": value,
             }
 
@@ -221,17 +221,25 @@ def metrics_of_poe(doc):
 
 
 def metrics_of_system(doc):
-    description = (
-        f"""ports:          {int(literal_of_doc(doc, 0, "Max_port", str))}\n"""
-        f"""model name:     {literal_of_doc(doc, 1, "model_name", str)}\n"""
-        f"""device name:    {literal_of_doc(doc, 2, "sys_dev_name", str)}\n"""
-        f"""build date:     {literal_of_doc(doc, 4, "sys_bld_date", str)}\n"""
-        f"""mac:            {literal_of_doc(doc, 5, "sys_MAC", str)}\n"""
-        f"""ip:             {literal_of_doc(doc, 6, "sys_IP", str)}\n"""
-        f"""subnet mask:    {literal_of_doc(doc, 7, "sys_sbnt_msk", str)}\n"""
-        f"""gateway:        {literal_of_doc(doc, 8, "sys_gateway", str)}\n"""
-        f"""dhcp state:     {literal_of_doc(doc, 9, "sys_dhcp_state", str)}\n"""
-    )
+    description = ("""ports:          {}
+model name:     {}
+device name:    {}
+build date:     {}
+mac:            {}
+ip:             {}
+subnet mask:    {}
+gateway:        {}
+dhcp state:     {}""".format(
+        int(literal_of_doc(doc, 0, "Max_port", str)),
+        literal_of_doc(doc, 1, "model_name", str),
+        literal_of_doc(doc, 2, "sys_dev_name", str),
+        literal_of_doc(doc, 4, "sys_bld_date", str),
+        literal_of_doc(doc, 5, "sys_MAC", str),
+        literal_of_doc(doc, 6, "sys_IP", str),
+        literal_of_doc(doc, 7, "sys_sbnt_msk", str),
+        literal_of_doc(doc, 8, "sys_gateway", str),
+        literal_of_doc(doc, 9, "sys_dhcp_state", str),
+    ))
     # 10 sys_first_login
     # 11 loop
     # 12 loop_status
@@ -260,18 +268,18 @@ def test_main():
 
         def output(out_dir, prefix, contents):
             pathlib.Path(out_dir).mkdir(parents=True, exist_ok=True)
-            path = f"{out_dir}/{prefix}.txt"
+            path = "{}/{}.txt".format(out_dir, prefix)
             with open(path, "w") as f:
                 f.write(contents)
 
-        js_path = f"examples/{prefix}_data.js"
+        js_path = "examples/{}_data.js".format(prefix)
         js = open(js_path).read()
 
         doc = pyjsparser.PyJsParser().parse(js)
 
         output("examples_doc", prefix, fmt(doc))
 
-        metrics_of = globals()[f"metrics_of_{prefix}"]
+        metrics_of = globals()["metrics_of_{}".format(prefix)]
         metrics = list(metrics_of(doc))
 
         output("examples_metrics", prefix, fmt(metrics))
@@ -294,20 +302,20 @@ def metrics_of_host(host):
 
     def log_in():
         data = {"password": host["password"]}
-        r = requests.post(f"http://{address}/login.cgi", data=data)
+        r = requests.post("http://{}/login.cgi".format(address), data=data)
         assert 200 == r.status_code
         if "Incorrect password, please try again." in r.text:
-            raise ValueError(f"Wrong password for switch at {address}")
+            raise ValueError("Wrong password for switch at {}".format(address))
 
     log_in()
 
     for prefix in ("link", "poe", "system"):
-        r = requests.get(f"http://{address}/{prefix}_data.js")
+        r = requests.get("http://{}/{}_data.js".format(address, prefix))
         assert 200 == r.status_code
         assert not r.text.startswith("<")
 
         doc = pyjsparser.PyJsParser().parse(r.text)
-        metrics_of = globals()[f"metrics_of_{prefix}"]
+        metrics_of = globals()["metrics_of_{}".format(prefix)]
 
         for m in metrics_of(doc):
             m["host"] = hostname

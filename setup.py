@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="riemann-zyxel-gs1200",
-    version="0",
+    version="1",
     author="Martin Stensgård",
     author_email="mastensg@mastensg.net",
     description="Send metrics to Riemann from Zyxel GS1200 PoE switches.",
